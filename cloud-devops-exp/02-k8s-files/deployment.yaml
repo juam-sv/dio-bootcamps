@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: app-html-deployment
+  name: app-html
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: app-html
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: app-html
+    spec:
+      containers:
+      - image: juamsv/app-html:v1
+        name: app-html
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}
