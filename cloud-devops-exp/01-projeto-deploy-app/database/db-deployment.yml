@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: juamsv/mydb:1.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3306
+        resources:
+          requests:
+            memory: "400Mi"
+            cpu: "500m"
+          limits:
+            memory: "1G"
+            cpu: "1000m"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-connection
+spec:
+  ports:
+  - port: 3306
+  selector:
+    app: mysql
+  clusterIP: None
